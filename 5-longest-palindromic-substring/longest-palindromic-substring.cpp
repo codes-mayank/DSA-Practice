@@ -18,7 +18,7 @@ public:
             }
             while (newString[i+1+p[i]]==newString[i-1-p[i]])
                 p[i]++;
-            if (i+p[i]<r){
+            if (i+p[i]>r){
                 c = i;
                 r = i+p[i];
             }
