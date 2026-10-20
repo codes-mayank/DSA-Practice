@@ -38,17 +38,12 @@ public:
             for (int j = 0; j < n; j += divisor) {
                 vector<int> res(nums.begin() + j, nums.begin() + j + divisor);
 
-                // Check if subarray can be sorted by rotation
                 if (!check(res)) {
                     flag = false;
                     break;
                 }
-
-                // Find minimum and maximum
                 int mn = *min_element(res.begin(), res.end());
                 int mx = *max_element(res.begin(), res.end());
-
-                // Check ordering between adjacent subarrays
                 if (prevMax > mn) {
                     flag = false;
                     break;
