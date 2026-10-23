@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool dfs(int node, vector<vector<int>>& adj, vector<int>& vis, vector<int>& pre, vector<int>& nums){
+    bool dfs(int node, vector<vector<int>>& adj, vector<bool>& vis, vector<bool>& pre, vector<bool>& isSafe){
         vis[node] = 1;
         pre[node] = 1;
         for (auto it : adj[node]){
@@ -8,24 +8,24 @@ public:
                 return true;
             }
             else if (!vis[it]){
-                if(dfs(it, adj, vis, pre, nums)){
-                    return true;
-                }
+                if (dfs(it, adj, vis, pre, isSafe)) return true;
             }
         }
-        nums[node] = 1;
         pre[node] = 0;
+        isSafe[node] = true;
         return false;
     }
 
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-        int n = graph.size();
-        vector<int>vis(n), path(n), nums(n);
-        for (int i=0; i<n; i++){
-            if (!vis[i]) dfs(i, graph, vis, path, nums);
+        int V = graph.size();
+        vector<bool> pre(V, false), vis(V, false), isSafe(V, false);
+        for (int i=0; i<V; i++){
+            if (!vis[i]){
+                dfs(i, graph, vis, pre, isSafe);
+            }
         }
-        vector<int>safeNodes;
-        for (int i=0; i<n; i++) if (nums[i]) safeNodes.push_back(i);
-        return safeNodes;
+        vector<int> res;
+        for (int i=0; i<V; i++) if (isSafe[i]) res.push_back(i);
+        return res;
     }
 };
