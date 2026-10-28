@@ -4,12 +4,6 @@ public:
         if (i<0 || j<0) return 0;
         if (i==0 && j==0) return x == grid[0][0];
         if (xorr[i][j][x] != -1) return xorr[i][j][x];
-        // for (int k=0; k<1024; k++) {
-        //     if (i>0 &&  helper(i-1, j, k, grid, xorr)==1) xorr[i][j][k^grid[i][j]] = 1;
-        //     if (j>0 &&  helper(i, j-1, k, grid, xorr)==1) xorr[i][j][k^grid[i][j]] = 1;
-        // }
-        // xorr[i+1][j][x] = helper(i+1, j, x,  grid, xorr);
-        // xorr[i][j+1][x] = helper(i, j+1, x, grid, xorr);
         int prev = x ^ grid[i][j];
         return xorr[i][j][x] = helper(i-1, j, prev, grid, xorr) || helper(i, j-1, prev, grid, xorr);
     }
