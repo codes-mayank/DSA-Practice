@@ -13,12 +13,8 @@ public:
     }   
 
     int waysToReachStair(int k) {
-        int jumps;
         long long ans = 0;
-        for (jumps=0; jumps<INT_MAX; jumps++) if (((1LL << jumps) - k) > (jumps+1)) break;
-        jumps--;
-        cout << jumps;
-        for (int i=0; i<=jumps; i++) {
+        for (int i=0; i<=31; i++) {
             int down = (1LL<<i) - k;
             if (down >= 0 && down <= i+1) {
                 ans += nCr(i+1, down);
