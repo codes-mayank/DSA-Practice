@@ -12,27 +12,13 @@ public:
             }
         }
         int ans = 0;
-        vector<vector<int>> vis(m, vector<int>(n));
         for (int i=0; i<m; i++) {
-            if (row[i] > 1) {
-                for (int j=0; j<n; j++) {
-                    if (!vis[i][j] && grid[i][j]) {
-                        vis[i][j] = 1;
-                        ans++;
-                    }
+            for (int j=0; j<n; j++) {
+                if (grid[i][j] && (row[i]>1 || col[j]>1)) {
+                    ans++;
                 }
-            } 
-        }
-        for (int j=0; j<n; j++) {
-            if (col[j] > 1) {
-                for (int i=0; i<m; i++) {
-                    if (!vis[i][j] && grid[i][j]) {
-                        vis[i][j] = 1;
-                        ans++;
-                    }
-                }
-            } 
-        }
+            }
+        } 
         return ans;
     }
 };
